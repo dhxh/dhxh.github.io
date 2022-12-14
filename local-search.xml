@@ -4,6 +4,38 @@
   
   
   <entry>
+    <title>windows安全加固</title>
+    <link href="/2022/12/14/windows%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/"/>
+    <url>/2022/12/14/windows%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/</url>
+    
+    <content type="html"><![CDATA[<h2 id="一、账户"><a href="#一、账户" class="headerlink" title="一、账户"></a>一、账户</h2><h3 id="1、默认账户安全"><a href="#1、默认账户安全" class="headerlink" title="1、默认账户安全"></a>1、默认账户安全</h3><ul><li>禁用Guest账户。</li><li>禁用或删除无用账户</li><li>Administartor 账户 组重名。</li></ul><h3 id="2、账号安全策略"><a href="#2、账号安全策略" class="headerlink" title="2、账号安全策略"></a>2、账号安全策略</h3><ul><li>密码复杂度</li><li>密码最小长度</li><li>密码最长使用期限</li><li>强制密码历史</li></ul><h3 id="3、账号锁定策略"><a href="#3、账号锁定策略" class="headerlink" title="3、账号锁定策略"></a>3、账号锁定策略</h3><ul><li>账号锁定阈值</li><li>账号锁定时间</li><li>重置账户锁定计数器</li></ul><h2 id="二、日志及审核策略"><a href="#二、日志及审核策略" class="headerlink" title="二、日志及审核策略"></a>二、日志及审核策略</h2><ul><li>对重要事件进行审核 审核策略 启用成功和失败</li><li>调整事件日志大小及日志满时存档</li></ul><h2 id="三、文件权限"><a href="#三、文件权限" class="headerlink" title="三、文件权限"></a>三、文件权限</h2><ul><li>关闭默认共享</li><li>共享文件夹取消Everyone</li><li>系统分区仅administrator、system完全控制</li><li>注册表 仅管理员控制，其他用户仅读</li></ul><h2 id="四、安全选项"><a href="#四、安全选项" class="headerlink" title="四、安全选项"></a>四、安全选项</h2><ul><li>根据需要禁用不必要的服务</li><li>根据需要启用安全选项(例)<ul><li>不允许SAM账户和共享的匿名枚举</li><li>不允许SAM账户的的匿名枚举</li><li>可匿名访问的共享</li><li>可匿名访问的命名管道<br>可远程访问的注册表路径</li><li>拒绝本地登录</li><li>从网络访问此计算机</li></ul></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>安全服务</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2022/12/14/hello-world/"/>
+    <url>/2022/12/14/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux应急响应</title>
     <link href="/2022/12/11/Linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
     <url>/2022/12/11/Linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</url>
@@ -35,19 +67,6 @@
       <category>安全服务</category>
       
     </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="/2022/12/11/hello-world/"/>
-    <url>/2022/12/11/hello-world/</url>
-    
-    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
-    
     
     
   </entry>
