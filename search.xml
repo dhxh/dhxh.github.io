@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>Linux应急响应</title>
+      <link href="/2023/03/16/Linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
+      <url>/2023/03/16/Linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、账户">一、账户</h2><ul><li>用户信息文件<ul><li>/etc/passwd</li><li>/etc/shadow</li><li>/etc/group</li></ul></li><li>who 查看当前登录用户</li><li>w 查看系统信息，某一刻用户行为</li><li>uptime 查看登录多久、多少用户、负载状态</li></ul><h3 id="1、是否为弱口令">1、是否为弱口令</h3><h3 id="2、查询是否有可疑账户">2、查询是否有可疑账户</h3><ul><li>cat /etc/passwd</li></ul><h3 id="3、-查询特权用户">3、 查询特权用户</h3><ul><li><code>awk -F: '$3==0&#123;print $1&#125;' /etc/passwd</code></li></ul><h3 id="4、查询可疑远程登录的账号">4、查询可疑远程登录的账号</h3><ul><li><code>awk '/\$1|\$6/&#123;print $1&#125;' /etc/shadow</code></li></ul><h3 id="5、查看sudo权限的用户">5、查看sudo权限的用户</h3><ul><li><code>cat /etc/sudoers | grep -v &quot;^#\|^$&quot; | grep &quot;ALL=(ALL)&quot;</code></li></ul><h3 id="6、公私钥免密登录">6、公私钥免密登录</h3><ul><li>查看/root/.ssh/authorized_keys是否修改。</li></ul><h3 id="7、日志">7、日志</h3><ul><li>日志默认位置 /var/log</li><li>日志配置 /etc/rsyslog.conf</li></ul><table><thead><tr><th style="text-align:left">日志文件</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:left">/var/log/cron</td><td style="text-align:left">记录了系统定时任务相关的日志</td></tr><tr><td style="text-align:left">/var/log/cups</td><td style="text-align:left">记录了打印信息的日志</td></tr><tr><td style="text-align:left">/var/log/dmesg</td><td style="text-align:left">记录了系统开机时内核自检信息。</td></tr><tr><td style="text-align:left">/var/log/message</td><td style="text-align:left">记录了系统重要信息的日志。</td></tr><tr><td style="text-align:left">/var/log/btmp</td><td style="text-align:left">记录了错误登录日志</td></tr><tr><td style="text-align:left">/var/log/lastlog</td><td style="text-align:left">记录了所有用户最后一次登录时间的日志</td></tr><tr><td style="text-align:left">/var/log/wtmp</td><td style="text-align:left">永久记录所有用户的登录、注销，同时记录系统启动、重启、关机事件。</td></tr><tr><td style="text-align:left">/var/log/utmp</td><td style="text-align:left">记录了当前已经登录的用户信息</td></tr><tr><td style="text-align:left">/var/log/secure</td><td style="text-align:left">记录验证和授权方面的信息，涉及账号和密码的程序都会记录</td></tr></tbody></table><h2 id="二、历史命令">二、历史命令</h2><ul><li><code>cat /root/.bash_history</code></li><li><code>cat /home/$USER/.bash_history</code></li></ul><h2 id="三、端口和进程">三、端口和进程</h2><h3 id="1、检查是否有异常连接的端口">1、检查是否有异常连接的端口</h3><ul><li><code>netstat -antlp</code></li><li><code>ls -l /proc/$PID/exe</code></li><li><code>lsof -i:port</code></li></ul><h3 id="2、检查异常进程">2、检查异常进程</h3><ul><li>注意事项<ul><li>有没有命名奇怪的进程</li><li>注意cpu占用</li><li>kill -9 PID后是否重启复活</li></ul></li><li>检查方法<ul><li><code>ps -aux</code></li><li><code>lsof -p PID</code></li><li>工具unhide</li></ul></li></ul><h2 id="四、开机启动、计划任务、服务">四、开机启动、计划任务、服务</h2><h3 id="1、开机启动项">1、开机启动项</h3><ul><li>开机启动目录<ul><li>/etc/init.d/</li><li>/etc/rc.local</li><li>/etc/rc.d/rc[0~6].d</li></ul></li></ul><h3 id="2、计划任务">2、计划任务</h3><ul><li>计划任务目录<ul><li>/var/spool/cron/</li><li>/var/spool/anacron</li><li>/etc/crontab</li><li>/etc/cron.d</li><li>/etc/cron.daily</li><li>/etc/cron.hourly</li><li>/etc/cron.monthly</li><li>/etc/cron.weekly</li><li>/etc/anacrontab</li></ul></li></ul><h3 id="3、服务">3、服务</h3><ul><li>服务自启动<ul><li><p>chkconfig</p><ul><li><code>chkconfig -add</code> 增加服务</li><li><code>chkconfig -del</code> 删除服务</li></ul></li><li><p>systemctl</p><ul><li><code>systemctl list-unit-file</code> 查看服务开机启动状态</li><li><code>systemctl enable</code> 开启服务开机启动</li><li><code>systemctl disable</code> 关闭服务开机启动</li></ul></li><li><p>加入开机启动目录</p></li></ul></li></ul><h2 id="五、系统信息">五、系统信息</h2><h3 id="1、可疑目录和文件">1、可疑目录和文件</h3><ul><li>检查敏感目录<ul><li>/tmp</li><li>/var/tmp</li><li>/usr/tmp</li></ul></li><li>find 查找最近修改过的文件<ul><li><code>find ./ -name '*' -mmin -60</code> 查找60分钟内修改的文件</li><li><code>find ./ -name '*' -mtime 0</code> 查找24小时内修改的文件</li><li><code>find ./ -ctime -2</code> 查找48小时内修改的文件</li></ul></li><li>find 指定时间段内修改的文件<ul><li><code>find ./ -newer file1 ! -newer file2</code> 列出比file新比file2旧的文件</li></ul></li><li>find 查找特殊权限的文件<ul><li><code>find / -perm -4000</code></li><li><code>find / -perm -u=s -type f 2&gt;/dev/null </code></li></ul></li><li>start 确认可疑文件时间</li></ul><h3 id="2、系统环境变量">2、系统环境变量</h3><ul><li><code>echo $PATH</code></li></ul><h3 id="3、命令替换排查">3、命令替换排查</h3><ul><li>执行一些命令参数，检查是否被替换</li><li>检查md5sum和文件大小</li><li><code>ls -lat</code> 按时间排序查看是否有修改的痕迹</li></ul><h2 id="六、github应急响应资源">六、github应急响应资源</h2><ul><li><a href="https://github.com/al0ne/LinuxCheck">https://github.com/al0ne/LinuxCheck</a></li><li><a href="https://github.com/grayddq/GScan">https://github.com/grayddq/GScan</a></li><li><a href="https://github.com/starnightcyber/Emergency-Material-Collection">https://github.com/starnightcyber/Emergency-Material-Collection</a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网络安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 安全服务 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Windows应急响应</title>
+      <link href="/2023/03/16/Windows%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
+      <url>/2023/03/16/Windows%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、账号">一、账号</h2><h3 id="1、弱口令">1、弱口令</h3><ul><li>查看服务器是否存在弱口令</li></ul><h3 id="2、可疑账号">2、可疑账号</h3><ul><li>禁用或者删除对应账户</li></ul><h3 id="3、隐藏账号">3、隐藏账号</h3><ul><li>检查注册表对应键值 HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account</li></ul><h2 id="二、端口和进程">二、端口和进程</h2><h3 id="1、检查端口连接">1、检查端口连接</h3><ul><li>netstat -ano 查看目前的网络连接，定位可疑的连接和端口。</li><li>根据查询到的pid定位到进程，tasklist /svc | findstr $pid</li></ul><h3 id="3、检查异常进程">3、检查异常进程</h3><ul><li>msinfo32 -&gt; 正在运行任务</li><li>任务管理器</li></ul><h3 id="4、快速定位恶意进程">4、快速定位恶意进程</h3><ul><li>没有签名验证信息的进程</li><li>没有描述信息的进程</li><li>进程的属主</li><li>进程路径是否合法</li><li>cpu或内存资源占用时间过高的进程</li></ul><h3 id="5、快速定位进程目录">5、快速定位进程目录</h3><ul><li>msinfo32</li><li>wmic -&gt; process</li><li>任务管理器</li></ul><h2 id="三、开机启动项-、计划任务、服务">三、开机启动项 、计划任务、服务</h2><h3 id="1、开机启动项">1、开机启动项</h3><ul><li>开机启动目录<ul><li><code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</code></li><li><code>C:\Users\xxx\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</code></li></ul></li><li>注册表目录<ul><li><code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run</code></li><li><code>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run</code></li><li><code>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Runonce</code></li><li>Logon Scripts后门 <code>HKEY_CURRENT_USER\Environment\UserInitMprLogonScript</code></li><li>userinit后门 <code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit </code></li></ul></li></ul><h3 id="2、计划任务">2、计划任务</h3><ul><li>任务计划程序 或 schtasks</li></ul><h3 id="3、服务">3、服务</h3><ul><li>services.msc 检查服务状态和启动类型，检查是否有异常服务。</li></ul><h3 id="4、工具">4、工具</h3><ul><li>Autoruns</li></ul><h2 id="四、系统信息">四、系统信息</h2><h3 id="1、系统补丁">1、系统补丁</h3><ul><li>systeminfo 查看是否有相应可用漏洞</li></ul><h3 id="2、可疑目录和文件">2、可疑目录和文件</h3><ul><li>最近打开文件 <code>C:\Users\xxx\Recent</code></li><li>各个目录，寻找最近更新过的文件</li><li>修改时间在创建时间之前的可疑文件</li><li>ADS隐藏文件 <code>dir /r</code></li><li>回收站、浏览器下载和历史记录</li><li>temp临时目录</li></ul><h2 id="五、日志分析">五、日志分析</h2><h3 id="1、事件id">1、事件id</h3><table><thead><tr><th style="text-align:center">事件ID</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:center">4624</td><td style="text-align:left">登录成功</td></tr><tr><td style="text-align:center">4625</td><td style="text-align:left">登录失败</td></tr><tr><td style="text-align:center">4634</td><td style="text-align:left">注销成功</td></tr><tr><td style="text-align:center">4647</td><td style="text-align:left">用户发起注销</td></tr><tr><td style="text-align:center">4672</td><td style="text-align:left">管理员登陆</td></tr><tr><td style="text-align:center">4620</td><td style="text-align:left">创建用户</td></tr></tbody></table><h3 id="2、登录类型">2、登录类型</h3><table><thead><tr><th style="text-align:center">登录类型</th><th style="text-align:left">描述</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:center">2</td><td style="text-align:left">C（Interactive）</td><td style="text-align:left">用户在本地登录。</td></tr><tr><td style="text-align:center">3</td><td style="text-align:left">网络（Network）</td><td style="text-align:left">常见于连接到共享文件夹或共享打印机时。</td></tr><tr><td style="text-align:center">4</td><td style="text-align:left">批处理（Batch）</td><td style="text-align:left">通常表明某计划任务启动。</td></tr><tr><td style="text-align:center">5</td><td style="text-align:left">服务（Service）</td><td style="text-align:left">每种服务都被配置在特定的用户账号下运行。</td></tr><tr><td style="text-align:center">7</td><td style="text-align:left">解锁（Unlock）</td><td style="text-align:left">屏保解锁。</td></tr><tr><td style="text-align:center">8</td><td style="text-align:left">网络明文</td><td style="text-align:left">登录的密码在网络上是通过明文传输的。</td></tr><tr><td style="text-align:center">9</td><td style="text-align:left">新凭证（NewCredentials）</td><td style="text-align:left">使用带/Netonly参数的RUNAS命令运行一个程序。</td></tr><tr><td style="text-align:center">10</td><td style="text-align:left">远程交互</td><td style="text-align:left">屏保解锁。</td></tr><tr><td style="text-align:center">11</td><td style="text-align:left">缓存交互</td><td style="text-align:left">屏保解锁。</td></tr></tbody></table>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网络安全 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 安全服务 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>butterfly主题魔改</title>
       <link href="/2023/03/16/butterfly%E4%B8%BB%E9%A2%98%E9%AD%94%E6%94%B9/"/>
       <url>/2023/03/16/butterfly%E4%B8%BB%E9%A2%98%E9%AD%94%E6%94%B9/</url>
@@ -30,60 +80,10 @@
     
     <entry>
       <title>windows安全加固</title>
-      <link href="/2022/12/14/windows%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/"/>
-      <url>/2022/12/14/windows%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/</url>
+      <link href="/2023/03/16/windows%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/"/>
+      <url>/2023/03/16/windows%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/</url>
       
         <content type="html"><![CDATA[<h2 id="一、账户">一、账户</h2><h3 id="1、默认账户安全">1、默认账户安全</h3><ul><li>禁用Guest账户。</li><li>禁用或删除无用账户</li><li>Administartor 账户 组重名。</li></ul><h3 id="2、账号安全策略">2、账号安全策略</h3><ul><li>密码复杂度</li><li>密码最小长度</li><li>密码最长使用期限</li><li>强制密码历史</li></ul><h3 id="3、账号锁定策略">3、账号锁定策略</h3><ul><li>账号锁定阈值</li><li>账号锁定时间</li><li>重置账户锁定计数器</li></ul><h2 id="二、日志及审核策略">二、日志及审核策略</h2><ul><li>对重要事件进行审核 审核策略 启用成功和失败</li><li>调整事件日志大小及日志满时存档</li></ul><h2 id="三、文件权限">三、文件权限</h2><ul><li>关闭默认共享</li><li>共享文件夹取消Everyone</li><li>系统分区仅administrator、system完全控制</li><li>注册表 仅管理员控制，其他用户仅读</li></ul><h2 id="四、安全选项">四、安全选项</h2><ul><li>根据需要禁用不必要的服务</li><li>根据需要启用安全选项(例)<ul><li>不允许SAM账户和共享的匿名枚举</li><li>不允许SAM账户的的匿名枚举</li><li>可匿名访问的共享</li><li>可匿名访问的命名管道<br>可远程访问的注册表路径</li><li>拒绝本地登录</li><li>从网络访问此计算机</li></ul></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 网络安全 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 安全服务 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Linux应急响应</title>
-      <link href="/2022/12/11/Linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
-      <url>/2022/12/11/Linux%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</url>
-      
-        <content type="html"><![CDATA[<h2 id="一、账户">一、账户</h2><ul><li>用户信息文件<ul><li>/etc/passwd</li><li>/etc/shadow</li><li>/etc/group</li></ul></li><li>who 查看当前登录用户</li><li>w 查看系统信息，某一刻用户行为</li><li>uptime 查看登录多久、多少用户、负载状态</li></ul><h3 id="1、是否为弱口令">1、是否为弱口令</h3><h3 id="2、查询是否有可疑账户">2、查询是否有可疑账户</h3><ul><li>cat /etc/passwd</li></ul><h3 id="3、-查询特权用户">3、 查询特权用户</h3><ul><li><code>awk -F: '$3==0&#123;print $1&#125;' /etc/passwd</code></li></ul><h3 id="4、查询可疑远程登录的账号">4、查询可疑远程登录的账号</h3><ul><li><code>awk '/\$1|\$6/&#123;print $1&#125;' /etc/shadow</code></li></ul><h3 id="5、查看sudo权限的用户">5、查看sudo权限的用户</h3><ul><li><code>cat /etc/sudoers | grep -v &quot;^#\|^$&quot; | grep &quot;ALL=(ALL)&quot;</code></li></ul><h3 id="6、公私钥免密登录">6、公私钥免密登录</h3><ul><li>查看/root/.ssh/authorized_keys是否修改。</li></ul><h3 id="7、日志">7、日志</h3><ul><li>日志默认位置 /var/log</li><li>日志配置 /etc/rsyslog.conf</li></ul><table><thead><tr><th style="text-align:left">日志文件</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:left">/var/log/cron</td><td style="text-align:left">记录了系统定时任务相关的日志</td></tr><tr><td style="text-align:left">/var/log/cups</td><td style="text-align:left">记录了打印信息的日志</td></tr><tr><td style="text-align:left">/var/log/dmesg</td><td style="text-align:left">记录了系统开机时内核自检信息。</td></tr><tr><td style="text-align:left">/var/log/message</td><td style="text-align:left">记录了系统重要信息的日志。</td></tr><tr><td style="text-align:left">/var/log/btmp</td><td style="text-align:left">记录了错误登录日志</td></tr><tr><td style="text-align:left">/var/log/lastlog</td><td style="text-align:left">记录了所有用户最后一次登录时间的日志</td></tr><tr><td style="text-align:left">/var/log/wtmp</td><td style="text-align:left">永久记录所有用户的登录、注销，同时记录系统启动、重启、关机事件。</td></tr><tr><td style="text-align:left">/var/log/utmp</td><td style="text-align:left">记录了当前已经登录的用户信息</td></tr><tr><td style="text-align:left">/var/log/secure</td><td style="text-align:left">记录验证和授权方面的信息，涉及账号和密码的程序都会记录</td></tr></tbody></table><h2 id="二、历史命令">二、历史命令</h2><ul><li><code>cat /root/.bash_history</code></li><li><code>cat /home/$USER/.bash_history</code></li></ul><h2 id="三、端口和进程">三、端口和进程</h2><h3 id="1、检查是否有异常连接的端口">1、检查是否有异常连接的端口</h3><ul><li><code>netstat -antlp</code></li><li><code>ls -l /proc/$PID/exe</code></li><li><code>lsof -i:port</code></li></ul><h3 id="2、检查异常进程">2、检查异常进程</h3><ul><li>注意事项<ul><li>有没有命名奇怪的进程</li><li>注意cpu占用</li><li>kill -9 PID后是否重启复活</li></ul></li><li>检查方法<ul><li><code>ps -aux</code></li><li><code>lsof -p PID</code></li><li>工具unhide</li></ul></li></ul><h2 id="四、开机启动、计划任务、服务">四、开机启动、计划任务、服务</h2><h3 id="1、开机启动项">1、开机启动项</h3><ul><li>开机启动目录<ul><li>/etc/init.d/</li><li>/etc/rc.local</li><li>/etc/rc.d/rc[0~6].d</li></ul></li></ul><h3 id="2、计划任务">2、计划任务</h3><ul><li>计划任务目录<ul><li>/var/spool/cron/</li><li>/var/spool/anacron</li><li>/etc/crontab</li><li>/etc/cron.d</li><li>/etc/cron.daily</li><li>/etc/cron.hourly</li><li>/etc/cron.monthly</li><li>/etc/cron.weekly</li><li>/etc/anacrontab</li></ul></li></ul><h3 id="3、服务">3、服务</h3><ul><li>服务自启动<ul><li><p>chkconfig</p><ul><li><code>chkconfig -add</code> 增加服务</li><li><code>chkconfig -del</code> 删除服务</li></ul></li><li><p>systemctl</p><ul><li><code>systemctl list-unit-file</code> 查看服务开机启动状态</li><li><code>systemctl enable</code> 开启服务开机启动</li><li><code>systemctl disable</code> 关闭服务开机启动</li></ul></li><li><p>加入开机启动目录</p></li></ul></li></ul><h2 id="五、系统信息">五、系统信息</h2><h3 id="1、可疑目录和文件">1、可疑目录和文件</h3><ul><li>检查敏感目录<ul><li>/tmp</li><li>/var/tmp</li><li>/usr/tmp</li></ul></li><li>find 查找最近修改过的文件<ul><li><code>find ./ -name '*' -mmin -60</code> 查找60分钟内修改的文件</li><li><code>find ./ -name '*' -mtime 0</code> 查找24小时内修改的文件</li><li><code>find ./ -ctime -2</code> 查找48小时内修改的文件</li></ul></li><li>find 指定时间段内修改的文件<ul><li><code>find ./ -newer file1 ! -newer file2</code> 列出比file新比file2旧的文件</li></ul></li><li>find 查找特殊权限的文件<ul><li><code>find / -perm -4000</code></li><li><code>find / -perm -u=s -type f 2&gt;/dev/null </code></li></ul></li><li>start 确认可疑文件时间</li></ul><h3 id="2、系统环境变量">2、系统环境变量</h3><ul><li><code>echo $PATH</code></li></ul><h3 id="3、命令替换排查">3、命令替换排查</h3><ul><li>执行一些命令参数，检查是否被替换</li><li>检查md5sum和文件大小</li><li><code>ls -lat</code> 按时间排序查看是否有修改的痕迹</li></ul><h2 id="六、github应急响应资源">六、github应急响应资源</h2><ul><li><a href="https://github.com/al0ne/LinuxCheck">https://github.com/al0ne/LinuxCheck</a></li><li><a href="https://github.com/grayddq/GScan">https://github.com/grayddq/GScan</a></li><li><a href="https://github.com/starnightcyber/Emergency-Material-Collection">https://github.com/starnightcyber/Emergency-Material-Collection</a></li></ul>]]></content>
-      
-      
-      <categories>
-          
-          <category> 网络安全 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 安全服务 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Windows应急响应</title>
-      <link href="/2022/12/11/Windows%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/"/>
-      <url>/2022/12/11/Windows%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/</url>
-      
-        <content type="html"><![CDATA[<h2 id="一、账号">一、账号</h2><h3 id="1、弱口令">1、弱口令</h3><ul><li>查看服务器是否存在弱口令</li></ul><h3 id="2、可疑账号">2、可疑账号</h3><ul><li>禁用或者删除对应账户</li></ul><h3 id="3、隐藏账号">3、隐藏账号</h3><ul><li>检查注册表对应键值 HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account</li></ul><h2 id="二、端口和进程">二、端口和进程</h2><h3 id="1、检查端口连接">1、检查端口连接</h3><ul><li>netstat -ano 查看目前的网络连接，定位可疑的连接和端口。</li><li>根据查询到的pid定位到进程，tasklist /svc | findstr $pid</li></ul><h3 id="3、检查异常进程">3、检查异常进程</h3><ul><li>msinfo32 -&gt; 正在运行任务</li><li>任务管理器</li></ul><h3 id="4、快速定位恶意进程">4、快速定位恶意进程</h3><ul><li>没有签名验证信息的进程</li><li>没有描述信息的进程</li><li>进程的属主</li><li>进程路径是否合法</li><li>cpu或内存资源占用时间过高的进程</li></ul><h3 id="5、快速定位进程目录">5、快速定位进程目录</h3><ul><li>msinfo32</li><li>wmic -&gt; process</li><li>任务管理器</li></ul><h2 id="三、开机启动项-、计划任务、服务">三、开机启动项 、计划任务、服务</h2><h3 id="1、开机启动项">1、开机启动项</h3><ul><li>开机启动目录<ul><li><code>C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp</code></li><li><code>C:\Users\xxx\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</code></li></ul></li><li>注册表目录<ul><li><code>HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run</code></li><li><code>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run</code></li><li><code>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Runonce</code></li><li>Logon Scripts后门 <code>HKEY_CURRENT_USER\Environment\UserInitMprLogonScript</code></li><li>userinit后门 <code>HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit </code></li></ul></li></ul><h3 id="2、计划任务">2、计划任务</h3><ul><li>任务计划程序 或 schtasks</li></ul><h3 id="3、服务">3、服务</h3><ul><li>services.msc 检查服务状态和启动类型，检查是否有异常服务。</li></ul><h3 id="4、工具">4、工具</h3><ul><li>Autoruns</li></ul><h2 id="四、系统信息">四、系统信息</h2><h3 id="1、系统补丁">1、系统补丁</h3><ul><li>systeminfo 查看是否有相应可用漏洞</li></ul><h3 id="2、可疑目录和文件">2、可疑目录和文件</h3><ul><li>最近打开文件 <code>C:\Users\xxx\Recent</code></li><li>各个目录，寻找最近更新过的文件</li><li>修改时间在创建时间之前的可疑文件</li><li>ADS隐藏文件 <code>dir /r</code></li><li>回收站、浏览器下载和历史记录</li><li>temp临时目录</li></ul><h2 id="五、日志分析">五、日志分析</h2><h3 id="1、事件id">1、事件id</h3><table><thead><tr><th style="text-align:center">事件ID</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:center">4624</td><td style="text-align:left">登录成功</td></tr><tr><td style="text-align:center">4625</td><td style="text-align:left">登录失败</td></tr><tr><td style="text-align:center">4634</td><td style="text-align:left">注销成功</td></tr><tr><td style="text-align:center">4647</td><td style="text-align:left">用户发起注销</td></tr><tr><td style="text-align:center">4672</td><td style="text-align:left">管理员登陆</td></tr><tr><td style="text-align:center">4620</td><td style="text-align:left">创建用户</td></tr></tbody></table><h3 id="2、登录类型">2、登录类型</h3><table><thead><tr><th style="text-align:center">登录类型</th><th style="text-align:left">描述</th><th style="text-align:left">说明</th></tr></thead><tbody><tr><td style="text-align:center">2</td><td style="text-align:left">C（Interactive）</td><td style="text-align:left">用户在本地登录。</td></tr><tr><td style="text-align:center">3</td><td style="text-align:left">网络（Network）</td><td style="text-align:left">常见于连接到共享文件夹或共享打印机时。</td></tr><tr><td style="text-align:center">4</td><td style="text-align:left">批处理（Batch）</td><td style="text-align:left">通常表明某计划任务启动。</td></tr><tr><td style="text-align:center">5</td><td style="text-align:left">服务（Service）</td><td style="text-align:left">每种服务都被配置在特定的用户账号下运行。</td></tr><tr><td style="text-align:center">7</td><td style="text-align:left">解锁（Unlock）</td><td style="text-align:left">屏保解锁。</td></tr><tr><td style="text-align:center">8</td><td style="text-align:left">网络明文</td><td style="text-align:left">登录的密码在网络上是通过明文传输的。</td></tr><tr><td style="text-align:center">9</td><td style="text-align:left">新凭证（NewCredentials）</td><td style="text-align:left">使用带/Netonly参数的RUNAS命令运行一个程序。</td></tr><tr><td style="text-align:center">10</td><td style="text-align:left">远程交互</td><td style="text-align:left">屏保解锁。</td></tr><tr><td style="text-align:center">11</td><td style="text-align:left">缓存交互</td><td style="text-align:left">屏保解锁。</td></tr></tbody></table>]]></content>
       
       
       <categories>
