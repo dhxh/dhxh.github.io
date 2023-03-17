@@ -1,0 +1,120 @@
+/* 页脚透明 */
+#footer{
+    background: transparent!important;
+  }
+  /* 页脚黑色透明玻璃效果移除 */
+  #footer::before{
+      background: transparent!important;
+    }
+  /* 头图透明 */
+  #page-header{
+    background: transparent!important;
+  }
+  /* 头图遮罩层透明 */
+  #page-header::before{
+    background: transparent!important;
+    }
+  /*top-img黑色透明玻璃效果移除，不建议加，除非你执着于完全一图流或者背景图对比色明显 */
+  #page-header.post-bg:before {
+    background-color: transparent!important;
+  }
+  /*夜间模式伪类遮罩层透明*/
+  [data-theme="dark"]
+    #footer::before{
+        background: transparent!important;
+      }
+  [data-theme="dark"]
+    #page-header::before{
+      background: transparent!important;
+      }
+  
+  
+  /*卡片透明*/
+  
+  :root {
+      --trans-light: rgba(255, 255, 255, 0.88);
+      --trans-dark: rgba(25, 25, 25, 0.88);
+      --border-style: 0px;
+      --backdrop-filter: blur(5px) saturate(150%);
+    }
+    
+    /* 首页文章卡片 */
+    #recent-posts > .recent-post-item {
+      background: var(--trans-light);
+      border-radius: 25px;
+      border: var(--border-style);
+    }
+    
+    /* 首页侧栏卡片 */
+    #aside-content .card-widget {
+      background: var(--trans-light);
+      border-radius: 18px;
+      border: var(--border-style);
+    }
+    
+    /* 文章页、归档页、普通页面 */
+    div#post,
+    div#page,
+    div#archive {
+      background: var(--trans-light);
+      border: var(--border-style);
+      border-radius: 20px;
+      --border-style: 0px;
+    }
+  
+    
+    /* 导航栏 */
+    #page-header.nav-fixed #nav {
+      background: rgba(255, 255, 255, 0.88);
+    }
+    
+    [data-theme="dark"] #page-header.nav-fixed #nav {
+      background: rgba(0, 0, 0, 0.7) !important;
+    }
+    
+    /* 夜间模式遮罩 */
+    [data-theme="dark"] #recent-posts > .recent-post-item,
+    [data-theme="dark"] #aside-content .card-widget,
+    [data-theme="dark"] div#post,
+    [data-theme="dark"] div#archive,
+    [data-theme="dark"] div#page {
+      background: var(--trans-dark);
+    }
+  
+    /* 阅读模式 */
+    .read-mode #aside-content .card-widget {
+      background: rgba(118, 238, 152, 0.5) !important;
+    }
+    .read-mode div#post {
+      background: rgba(114, 227, 146, 0.5) !important;
+    }
+    
+    /* 夜间模式下的阅读模式 */
+    [data-theme="dark"] .read-mode #aside-content .card-widget {
+      background: rgba(25, 25, 25, 0.9) !important;
+      color: #ffffff;
+    }
+    [data-theme="dark"] .read-mode div#post {
+      background: rgba(25, 25, 25, 0.9) !important;
+      color: #ffffff;
+    }
+  
+  
+  /*加载动画*/
+  
+  .loading-img {
+    background: url(/style/img/logo.png) no-repeat center center;
+    background-size: cover;
+  }
+  
+  /* 鼠标样式 */
+  body {
+    cursor: url("/style/img/default.cur"), default;
+  }
+  a,
+  img,
+  button {
+    cursor: url("/style/img/pointer.cur"), default !important;
+  }
+  
+  
