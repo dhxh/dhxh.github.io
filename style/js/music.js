@@ -4,6 +4,7 @@ const ap = new APlayer({
     autoplay: true,
     loop: 'all',
     order: 'random',
+    preload: 'auto',
     audio: [
         {
         name: '君は僕に似ている',
