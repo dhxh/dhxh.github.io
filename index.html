@@ -52,7 +52,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-03-17 14:26:26'
+  postUpdate: '2023-03-17 15:18:18'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -185,28 +185,28 @@ who 查看当前登录用户
 w 查看系统信息，某一刻用户行为
 uptime 查看登录多久、多少用户、负载状态
 
-1、是否为弱口令
-2、查询是否有可疑账户
+是否为弱口令
+查询是否有可疑账户
 
 cat /etc/passwd
 
-3、 查询特权用户
+查询特权用户
 
 awk -F: '$3==0&#123;print $1&#125;' /etc/passwd
 
-4、查询可疑远程登录的账号
+查询可疑远程登录的账号
 
 awk '/\$1|\$6/&#123;print $1&#125;' /etc/shadow
 
-5、查看sudo权限的用户
+查看sudo权限的用户
 
 cat /etc/sudoers | grep -v &quot;^#\|^$&quot; | grep &quot;ALL=(ALL)&quot;
 
-6、公私钥免密登录
+公私钥免密登录
 
 查看/root/.ssh/authorized_keys是否修改。
 
-7、日志
+日志
 
 日志默认位置 /var/log
 日志配置 /etc/rsyslog.conf
@@ -224,31 +224,32 @@ cat /etc/sudoers | grep -v &quot;^#\|^$&quot; | grep &quot;ALL=(ALL)&quot;
 记录了系统定时任务相关的日志
 
 
-/v ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/16/Windows%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="Windows应急响应">Windows应急响应</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-16T17:24:39.000Z" title="发表于 2023-03-17 01:24:39">2023-03-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1/">安全服务</a></span></div><div class="content">一、账号
-1、弱口令
+/var/log/cups
+记录了 ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/16/Windows%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" title="Windows应急响应">Windows应急响应</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-16T17:24:39.000Z" title="发表于 2023-03-17 01:24:39">2023-03-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1/">安全服务</a></span></div><div class="content">一、账号
+弱口令
 
 查看服务器是否存在弱口令
 
-2、可疑账号
+可疑账号
 
 禁用或者删除对应账户
 
-3、隐藏账号
+隐藏账号
 
 检查注册表对应键值 HKEY_LOCAL_MACHINE\SAM\SAM\Domains\Account
 
 二、端口和进程
-1、检查端口连接
+检查端口连接
 
 netstat -ano 查看目前的网络连接，定位可疑的连接和端口。
 根据查询到的pid定位到进程，tasklist /svc | findstr $pid
 
-3、检查异常进程
+检查异常进程
 
 msinfo32 -&gt; 正在运行任务
 任务管理器
 
-4、快速定位恶意进程
+快速定位恶意进程
 
 没有签名验证信息的进程
 没有描述信息的进程
@@ -256,19 +257,19 @@ msinfo32 -&gt; 正在运行任务
 进程路径是否合法
 cpu或内存资源占用时间过高的进程
 
-5、快速定位进程目录
+快速定位进程目录
 
 msinfo32
 wmic -&gt; process
 任务管理器
 
 三、开机启动项 、计划任务、服务
-1、开机启动项
+开机启动项
 
 开机启动目录
 
 C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
-C:\Users\xxx\AppData\Roaming\Microsoft\Window ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/16/butterfly%E4%B8%BB%E9%A2%98%E9%AD%94%E6%94%B9/" title="butterfly主题魔改">butterfly主题魔改</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-16T17:24:39.000Z" title="发表于 2023-03-17 01:24:39">2023-03-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E7%AC%94%E8%AE%B0/">日常笔记</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/hexo/">hexo</a></span></div><div class="content">一图流
+C:\Users\xxx\AppData\Roaming\Microsoft\Windows\Start Menu\Pro ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/16/butterfly%E4%B8%BB%E9%A2%98%E9%AD%94%E6%94%B9/" title="butterfly主题魔改">butterfly主题魔改</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-16T17:24:39.000Z" title="发表于 2023-03-17 01:24:39">2023-03-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E6%97%A5%E5%B8%B8%E7%AC%94%E8%AE%B0/">日常笔记</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/hexo/">hexo</a></span></div><div class="content">一图流
 /* 页脚透明 */#footer&#123;  background: transparent!important;&#125;/* 页脚黑色透明玻璃效果移除 */#footer::before&#123;    background: transparent!important;  &#125;/* 头图透明 */#page-header&#123;  background: transparent!important;&#125;/* 头图遮罩层透明 */#page-header::before&#123;  background: transparent!important;  &#125;/*top-img黑色透明玻璃效果移除，不建议加，除非你执着于完全一图流或者背景图对比色明显 */#page-header.post-bg:before &#123;  background-color: transparent!important;&#125;/*夜间模式伪类遮罩层透明*/[data-theme=&quot;dark&quot;]  #footer::before& ...</div></div></div><div class="recent-post-item"><div class="recent-post-info no-cover"><a class="article-title" href="/2023/03/16/windows%E5%AE%89%E5%85%A8%E5%8A%A0%E5%9B%BA/" title="windows安全加固">windows安全加固</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time datetime="2023-03-16T17:24:39.000Z" title="发表于 2023-03-17 01:24:39">2023-03-17</time></span><span class="article-meta"><span class="article-meta-separator">|</span><i class="fas fa-inbox"></i><a class="article-meta__categories" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/">网络安全</a></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1/">安全服务</a></span></div><div class="content">一、账户
 1、默认账户安全
 
@@ -323,7 +324,7 @@ Administartor 账户 组重名。
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E6%97%A5%E5%B8%B8%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">日常笔记</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/"><span class="card-category-list-name">网络安全</span><span class="card-category-list-count">3</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1/" style="font-size: 1.5em; color: #99a9bf">安全服务</a> <a href="/tags/hexo/" style="font-size: 1.1em; color: #999">hexo</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">4</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2023-01-01T00:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-03-17T06:26:26.009Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Rainbow</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div id="player"></div><link href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/%E5%AE%89%E5%85%A8%E6%9C%8D%E5%8A%A1/" style="font-size: 1.5em; color: #99a9bf">安全服务</a> <a href="/tags/hexo/" style="font-size: 1.1em; color: #999">hexo</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">三月 2023</span><span class="card-archive-list-count">4</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">4</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2023-01-01T00:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-03-17T07:18:17.881Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By Rainbow</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><a class="icon-V hidden" onclick="switchNightMode()" title="浅色和深色模式转换"><svg width="25" height="25" viewBox="0 0 1024 1024"><use id="modeicon" xlink:href="#icon-moon"></use></svg></a><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div id="player"></div><link href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" rel="stylesheet"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><div class="js-pjax"><script>window.typedJSFn = {
   init: (str) => {
     window.typed = new Typed('#subtitle', Object.assign({
       strings: str,
@@ -360,7 +361,7 @@ Administartor 账户 组重名。
   })
 }
 typedJSFn.run(subtitleType)
-</script></div><script src="/style/js/sun_moon.js" async></script><script type="text/javascript" src="/style/js/music.js"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+</script></div><script src="/style/js/sun_moon.js" async></script><script type="text/javascript" src="/style/js/custom.js"></script><script type="text/javascript" src="/style/js/music.js"></script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="false"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 
 var pjax = new Pjax({
   elements: 'a:not([target="_blank"])',
