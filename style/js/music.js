@@ -2,6 +2,8 @@ const ap = new APlayer({
     container: document.getElementById('player'),
     fixed: true,
     autoplay: true,
+    loop: 'all',
+    order: 'random',
     audio: [
         {
         name: '君は僕に似ている',
